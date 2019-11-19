@@ -1,10 +1,7 @@
-$(".key").click(function (event) {
-    console.log("you clicked: ", this.innerText)
-})
 
 //Clear key listener
 $(".clear-key").click(function (event) {
-
+    
     calculator.clearAll();
     calculator.refreshDisplay();
     console.log("you clicked: ", this.innerText)
@@ -12,27 +9,40 @@ $(".clear-key").click(function (event) {
 
 //Operator keys listener
 $(".operator").click(function (event) {
+    
     if(calculator.isOperand1 && calculator.isOperand2 && calculator.isOperator) {
         calculator.performCalc();
         calculator.refreshDisplay();
+        calculator.operator = this.innerText;
         return;
     }
-    if(      )
-
-
+    
     calculator.operator = this.innerText;
+    calculator.isOperator = true;
     calculator.operand1 = calculator.display;
-
+    
     console.log("you clicked: ", this.innerText)
 })
 
 //Digits keys listener
 $(".digit").click(function (event) {
     console.log("you clicked: ", this.innerText);
-
+    
     if (this.innerText == "0" && calculator.display.toString() == 0) return;
     calculator.display = parseFloat(calculator.display.toString() + this.innerText);
     calculator.refreshDisplay();
+})
+
+$(".debugger").click(function (event) {
+    $(".operand1").html(calculator.operand1);
+    $(".operand2").html(calculator.operand2);
+    $(".deb_operator").text(calculator.operator.toString());
+    console.log('operator' + calculator.operator);
+    $(".deb_display").html(calculator.display);
+    $(".isoperand1").html(calculator.isOperand1.toString());
+    $(".isoperand2").html(calculator.isOperand2.toString());
+    $(".isoperator").html(calculator.isOperator.toString());
+    // console.log("you clicked: ", this.innerText)
 })
 
 class Calculator {

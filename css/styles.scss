@@ -55,7 +55,6 @@ h1 {
     margin: 0 auto;
     text-align: right;
     border-radius: $border-radius;
-
 }
 
 .display__field--small {
@@ -99,29 +98,33 @@ h1 {
     }
     
     &:hover {
-        
-        background-color: $color-active-background;
+        // background-color: $color-active-background;
+        background-color: lighten($color-dark-background, 10%);
     }
 }
 
 .digit {
     background-color: $color-digit-background;
     border-radius: 50%;
+
+    &:hover {
+        background-color: lighten($color-digit-background, 10%);
+    }
 }
 
 .clear-key {
     background-color: $color-clear-background;
+
     &:hover {
         background-color: lighten($color-clear-background, 10%);
-
     }
 }
 
 .res {
     background-color: $color-result-background;
+
         &:hover {
             background-color: lighten($color-result-background, 10%);
-        
         }
 }
 
