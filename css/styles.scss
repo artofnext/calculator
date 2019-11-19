@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Tomorrow&display=swap');
 
-$border-radius: 5px;
+$border-radius: 10px;
 $color-border: gray;
 $color-main: gray;
 $color-dark-background: rgb(46, 46, 46);
@@ -26,9 +26,10 @@ p {
 
 h1 {
     font-family: 'Tomorrow', sans-serif;
-    font-size: 1em;
+    font-size: 2em;
     text-transform: uppercase;
     text-align: center;
+    // margin: 0;
 }
 
 .container {
@@ -41,7 +42,11 @@ h1 {
 }
 
 .display {
-    margin-top: 30px;
+    // margin-top: 30px;
+}
+
+.display__container {
+    margin: 5px auto;
 }
 
 .display__field {
@@ -49,7 +54,7 @@ h1 {
     color: $color-display;
     font-size: 2em;
     background-color: $color-display-background;
-    border: 1px solid $color-border;
+    // border: 1px solid $color-border;
     padding: 5px 10px;
     width: 90%;
     margin: 0 auto;
