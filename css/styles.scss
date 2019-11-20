@@ -39,6 +39,7 @@ h1 {
     border: 1px solid $color-border;
     border-radius: $border-radius;
     background-color: $color-light-background;
+    box-shadow: 0 0 5px $color-dark-background;
 }
 
 .display {
@@ -52,7 +53,7 @@ h1 {
 .display__field {
     font-family: 'Tomorrow', sans-serif;
     color: $color-display;
-    font-size: 2em;
+    font-size: 1.5em;
     background-color: $color-display-background;
     // border: 1px solid $color-border;
     padding: 5px 10px;
@@ -76,7 +77,7 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
+    
 }
 
 .key {
@@ -91,6 +92,7 @@ h1 {
     border-radius: $border-radius;
     vertical-align: middle;
     background-color: $color-dark-background;
+    // box-shadow: 0 0 5px $color-dark-background;
     
     p {
         margin: auto;
