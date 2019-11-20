@@ -1,43 +1,43 @@
 
 //Clear key listener
-$(".clear-key").click(function (event) {
-    
+$(".clear-key").click(function () {
+
     clearAll();
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
 
 //ClearE key listener
-$(".ce-key").click(function (event) {
-    
+$(".ce-key").click(function () {
+
     calculator.display = 0;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
 
 //Backspace key listener
-$(".bkspc").click(function (event) {
+$(".bkspc").click(function () {
     if (calculator.display.toString().length < 2) { //if there only one digit on display
         calculator.display = 0;
         refreshDisplay();
         return;
     }
-    calculator.display = calculator.display.toString().slice(0, -1);
+    calculator.display = parseFloat(calculator.display.toString().slice(0, -1));
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
 
 //Point key listener
 $(".point").click(function (event) {
-    
-    if(calculator.display.toString().includes(".")) return;
+
+    if (calculator.display.toString().includes(".")) return;
     if (calculator.readyForSecondOperand) { //if operator was set
         calculator.display = '0' + this.innerText;
         calculator.readyForSecondOperand = false;
         refreshDisplay();
         return;
     }
-    if(calculator.display.toString().length > 15) return; //no more than 16 digits on display
+    if (calculator.display.toString().length > 15) return; //no more than 16 digits on display
     calculator.display = calculator.display.toString() + this.innerText;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
@@ -45,8 +45,8 @@ $(".point").click(function (event) {
 
 //Sight key listener
 $(".sight").click(function (event) {
-    
-    calculator.display *= -1; 
+
+    calculator.display *= -1;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
@@ -63,7 +63,7 @@ $(".operator").click(function (event) {
         calculator.readyForSecondOperand = true;
         return;
     }
-   
+
     calculator.readyForSecondOperand = true;
     calculator.operand = parseFloat(calculator.display.toString()); // set the operand from display
     calculator.operator = this.innerText;
@@ -72,36 +72,35 @@ $(".operator").click(function (event) {
 })
 
 //Result key listener
-$(".res").click(function (event) {
+$(".res").click(function () {
     if (calculator.operator && calculator.operand) {
         calculate();
         calculator.readyForSecondOperand = true;
         refreshDisplay();
     }
-    
+
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
 
 
 //Digits keys listener
-$(".digit").click(function (event) {
+$(".digit").click(function () {
     console.log("you clicked: ", this.innerText);
     if (calculator.readyForSecondOperand) { //if operator was set
-        calculator.operand = parseFloat(calculator.display.toString()); // set the operand from display
+        calculator.operand = calculator.display; // set the operand from display
         calculator.display = 0;
         calculator.readyForSecondOperand = false; // reset readyness for operator
         refreshDisplay();
     }
-    if(calculator.display.toString().length > 15) return; //no more than 16 digits on display
+    if (calculator.display.toString().length > 14) return; //no more than 15 digits on display
     if (this.innerText == "0" && calculator.display == 0) return;
     calculator.display = parseFloat(calculator.display.toString() + this.innerText);
     refreshDisplay();
 })
 
-
 //Log calculator object
-$(".display__container").click(function (event) {
+$(".display__container").click(function () {
     console.log("Calculator object:");
     console.table(calculator);
 })
@@ -126,13 +125,13 @@ function clearAll() {
 }
 
 function alertError() {
-
     $("#lower_display").html("ERROR");
     console.log('Error1');
 }
 
 function calculate() {
     //if (this.isOperand1 && this.isOperand2 && this.isOperator) {
+    let surprise = "ERROR!";
     let isError = false;
     switch (calculator.operator) {
         case "+":
@@ -147,10 +146,9 @@ function calculate() {
         case "÷":
             if (calculator.display == 0) {
                 console.log('Error');
-                $("#lower_display").html("Surprise");
-                // document.body.getElementById('lower_display').innerText = "ERROR";
+                $("#lower_display").html(surprise); //ToDo dont work
                 isError = true;
-                // alertError();
+                alertError();
                 break;
             }
             calculator.display = calculator.operand / calculator.display;
