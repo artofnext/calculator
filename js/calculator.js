@@ -89,11 +89,12 @@ $(".digit").click(function (event) {
     console.log("you clicked: ", this.innerText);
     if (calculator.readyForSecondOperand) { //if operator was set
         calculator.operand = parseFloat(calculator.display.toString()); // set the operand from display
-        calculator.display = '';
+        calculator.display = 0;
         calculator.readyForSecondOperand = false; // reset readyness for operator
+        refreshDisplay();
     }
     if(calculator.display.toString().length > 15) return; //no more than 16 digits on display
-    if (this.innerText == "0" && calculator.display.toString() == 0) return;
+    if (this.innerText == "0" && calculator.display == 0) return;
     calculator.display = parseFloat(calculator.display.toString() + this.innerText);
     refreshDisplay();
 })
@@ -136,46 +137,47 @@ function clearAll() {
 }
 
 function alertError() {
-    $("#lower_display").html("");
+
+    $("#lower_display").html("ERROR");
+    console.log('Error1');
 }
 
 function calculate() {
-            //if (this.isOperand1 && this.isOperand2 && this.isOperator) {
-                let isError = false;
-                switch (calculator.operator) {
-                    case "+":
-                        calculator.display = calculator.operand + calculator.display;
-                        break;
-                    case "-":
-                        calculator.display = calculator.operand - calculator.display;
-                        break;
-                    case "×":
-                        calculator.display = calculator.operand * calculator.display;
-                        break;
-                    case "÷":
-                        if (calculator.display == 0) {
-                            isError = true;
-                            alertError();
-                            break;
-                        }
-                        calculator.display = calculator.operand / calculator.display;
-                        break;
-                    default:
-                        console.log('Perform Calc out of operators!');
-                //}
-                    }
-                //for next operation
-                if (!isError) {
-                    calculator.operand = calculator.display;
-                } else {
-                    calculator.readyForSecondOperand = true;
-                }
-    
-            // } else {
-            //     console.log('Operands or oiperator not set!');
-            // }
-        
+    //if (this.isOperand1 && this.isOperand2 && this.isOperator) {
+    let isError = false;
+    switch (calculator.operator) {
+        case "+":
+            calculator.display = calculator.operand + calculator.display;
+            break;
+        case "-":
+            calculator.display = calculator.operand - calculator.display;
+            break;
+        case "×":
+            calculator.display = calculator.operand * calculator.display;
+            break;
+        case "÷":
+            if (calculator.display == 0) {
+                console.log('Error');
+                $("#lower_display").html("Surprise");
+                // document.body.getElementById('lower_display').innerText = "ERROR";
+                isError = true;
+                // alertError();
+                break;
+            }
+            calculator.display = calculator.operand / calculator.display;
+            break;
+        default:
+            console.log('Perform Calc out of operators!');
+        //}
     }
+    //for next operation
+    if (!isError) {
+        // calculator.operand = calculator.display;
+        calculator.operator = null; //
+    } else {
+        calculator.readyForSecondOperand = true;
+    }
+}
 
 
 // class Calculator {
