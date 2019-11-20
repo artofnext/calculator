@@ -15,6 +15,18 @@ $(".ce-key").click(function (event) {
     console.log("you clicked: ", this.innerText)
 })
 
+//Backspace key listener
+$(".bkspc").click(function (event) {
+    if (calculator.display.toString().length < 2) { //if there only one digit on display
+        calculator.display = 0;
+        refreshDisplay();
+        return;
+    }
+    calculator.display = calculator.display.toString().slice(0, -1);
+    refreshDisplay();
+    console.log("you clicked: ", this.innerText)
+})
+
 //Point key listener
 $(".point").click(function (event) {
     
