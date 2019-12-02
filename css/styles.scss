@@ -36,6 +36,7 @@ h1 {
 
 .container {
     max-width: $width;
+    min-width: $width - 10px;
     // width: 90%;
     margin: 0 auto;
     border: 1px solid $color-border;
