@@ -17,6 +17,10 @@ $(".ce-key").click(function () {
 
 //Backspace key listener
 $(".bkspc").click(function () {
+    if (calculator.errorState) {
+        calculator.display = 0;
+        calculator.errorState = false;
+    }
     if (calculator.display.toString().length < 2) { //if there only one digit on display
         calculator.display = 0;
         refreshDisplay();
@@ -29,7 +33,10 @@ $(".bkspc").click(function () {
 
 //Point key listener
 $(".point").click(function (event) {
-
+    if (calculator.errorState) {
+        calculator.display = 0;
+        calculator.errorState = false;
+    }
     if (calculator.display.toString().includes(".")) return;
     if (calculator.readyForSecondOperand) { //if operator was set
         calculator.display = '0' + this.innerText;
@@ -45,7 +52,10 @@ $(".point").click(function (event) {
 
 //Sight key listener
 $(".sight").click(function (event) {
-
+    if (calculator.errorState) {
+        calculator.display = 0;
+        calculator.errorState = false;
+    }
     calculator.display *= -1;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
@@ -53,7 +63,10 @@ $(".sight").click(function (event) {
 
 //Operator keys listener
 $(".operator").click(function (event) {
-
+    if (calculator.errorState) {
+        calculator.display = 0;
+        calculator.errorState = false;
+    }
     // if operator pressed should perform calculation if operator is set
     if (calculator.operator && calculator.operand) {
         calculate();
@@ -73,12 +86,12 @@ $(".operator").click(function (event) {
 
 //Result key listener
 $(".res").click(function () {
+    if (calculator.errorState) {return}
     if (calculator.operator && calculator.operand) {
         calculate();
         calculator.readyForSecondOperand = true;
-        refreshDisplay();
+        // refreshDisplay();
     }
-
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
 })
@@ -86,6 +99,10 @@ $(".res").click(function () {
 
 //Digits keys listener
 $(".digit").click(function () {
+    if (calculator.errorState) {
+        calculator.display = 0;
+        calculator.errorState = false;
+    }
     console.log("you clicked: ", this.innerText);
     if (calculator.readyForSecondOperand) { //if operator was set
         calculator.operand = calculator.display; // set the operand from display
@@ -111,6 +128,7 @@ let calculator = {
     operator: null,
     display: '0',
     operand: null,
+    errorState: false,
 }
 
 function refreshDisplay() {
@@ -124,15 +142,8 @@ function clearAll() {
     calculator.operand = null;
 }
 
-function alertError() {
-    $("#lower_display").html("ERROR");
-    console.log('Error1');
-}
-
 function calculate() {
-    //if (this.isOperand1 && this.isOperand2 && this.isOperator) {
-    let surprise = "ERROR!";
-    let isError = false;
+
     switch (calculator.operator) {
         case "+":
             calculator.display = calculator.operand + calculator.display;
@@ -145,24 +156,14 @@ function calculate() {
             break;
         case "÷":
             if (calculator.display == 0) {
-                console.log('Error');
-                $("#lower_display").html(surprise); //ToDo dont work
-                isError = true;
-                alertError();
+                calculator.display = "ERROR";
+                calculator.errorState = true;
                 break;
             }
             calculator.display = calculator.operand / calculator.display;
             break;
         default:
             console.log('Perform Calc out of operators!');
-        //}
-    }
-    //for next operation
-    if (!isError) {
-        // calculator.operand = calculator.display;
-        calculator.operator = null; //
-    } else {
-        calculator.readyForSecondOperand = true;
     }
 }
 
