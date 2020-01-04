@@ -104,6 +104,7 @@ function operatorKey (event) {
 
 //Result key listener
 $(".res").click(resKey);
+$(".res").on("tap", resKey);
 // $(".res").touchstart(resKey);
 
 function resKey () {
