@@ -1,6 +1,7 @@
 
 //Clear key listener
 $(".clear-key").click(clearKey);
+$(".clear-key").on("tap", clearKey);
 
 function clearKey () {
 
@@ -11,6 +12,7 @@ function clearKey () {
 
 //ClearE key listener
 $(".ce-key").click(ceKey);
+// $(".ce-key").touchstart(ceKey);
 
 function ceKey () {
 
@@ -21,6 +23,7 @@ function ceKey () {
 
 //Backspace key listener
 $(".bkspc").click(bkspcKey);
+// $(".bkspc").touchstart(bkspcKey);
 
 function bkspcKey () {
     if (calculator.errorState) {
@@ -39,6 +42,7 @@ function bkspcKey () {
 
 //Point key listener
 $(".point").click(pointKey);
+// $(".point").touchstart(pointKey);
 
 function pointKey (event) {
     if (calculator.errorState) {
@@ -60,6 +64,7 @@ function pointKey (event) {
 
 //Sight key listener
 $(".sight").click(sightKey);
+// $(".sight").touchstart(sightKey);
 
 function sightKey (event) {
     if (calculator.errorState) {
@@ -73,6 +78,7 @@ function sightKey (event) {
 
 //Operator keys listener
 $(".operator").click(operatorKey);
+// $(".operator").touchstart(operatorKey);
 
 function operatorKey (event) {
     if (calculator.errorState) {
@@ -98,6 +104,7 @@ function operatorKey (event) {
 
 //Result key listener
 $(".res").click(resKey);
+// $(".res").touchstart(resKey);
 
 function resKey () {
     if (calculator.errorState) {return}
@@ -113,6 +120,7 @@ function resKey () {
 
 //Digits keys listener
 $(".digit").click(digitKey);
+// $(".digit").touchstart(digitKey);
 
 function digitKey () {
     if (calculator.errorState) {
@@ -134,6 +142,7 @@ function digitKey () {
 
 //Log calculator object
 $(".display__container").click(displayField);
+// $(".display__container").touchstart(displayField);
 
 function displayField () {
     console.log("Calculator object:");
