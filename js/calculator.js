@@ -1,22 +1,28 @@
 
 //Clear key listener
-$(".clear-key").click(function () {
+$(".clear-key").click(clearKey);
+
+function clearKey () {
 
     clearAll();
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //ClearE key listener
-$(".ce-key").click(function () {
+$(".ce-key").click(ceKey);
+
+function ceKey () {
 
     calculator.display = 0;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //Backspace key listener
-$(".bkspc").click(function () {
+$(".bkspc").click(bkspcKey);
+
+function bkspcKey () {
     if (calculator.errorState) {
         calculator.display = 0;
         calculator.errorState = false;
@@ -29,10 +35,12 @@ $(".bkspc").click(function () {
     calculator.display = parseFloat(calculator.display.toString().slice(0, -1));
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //Point key listener
-$(".point").click(function (event) {
+$(".point").click(pointKey);
+
+function pointKey (event) {
     if (calculator.errorState) {
         calculator.display = 0;
         calculator.errorState = false;
@@ -48,10 +56,12 @@ $(".point").click(function (event) {
     calculator.display = calculator.display.toString() + this.innerText;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //Sight key listener
-$(".sight").click(function (event) {
+$(".sight").click(sightKey);
+
+function sightKey (event) {
     if (calculator.errorState) {
         calculator.display = 0;
         calculator.errorState = false;
@@ -59,10 +69,12 @@ $(".sight").click(function (event) {
     calculator.display *= -1;
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //Operator keys listener
-$(".operator").click(function (event) {
+$(".operator").click(operatorKey);
+
+function operatorKey (event) {
     if (calculator.errorState) {
         calculator.display = 0;
         calculator.errorState = false;
@@ -82,10 +94,12 @@ $(".operator").click(function (event) {
     calculator.operator = this.innerText;
 
     console.log("you clicked: ", this.innerText)
-})
+};
 
 //Result key listener
-$(".res").click(function () {
+$(".res").click(resKey);
+
+function resKey () {
     if (calculator.errorState) {return}
     if (calculator.operator && calculator.operand) {
         calculate();
@@ -94,11 +108,13 @@ $(".res").click(function () {
     }
     refreshDisplay();
     console.log("you clicked: ", this.innerText)
-})
+};
 
 
 //Digits keys listener
-$(".digit").click(function () {
+$(".digit").click(digitKey);
+
+function digitKey () {
     if (calculator.errorState) {
         calculator.display = 0;
         calculator.errorState = false;
@@ -114,13 +130,15 @@ $(".digit").click(function () {
     if (this.innerText == "0" && calculator.display == 0) return;
     calculator.display = parseFloat(calculator.display.toString() + this.innerText);
     refreshDisplay();
-})
+};
 
 //Log calculator object
-$(".display__container").click(function () {
+$(".display__container").click(displayField);
+
+function displayField () {
     console.log("Calculator object:");
     console.table(calculator);
-})
+};
 
 //Calculator object
 let calculator = {
