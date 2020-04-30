@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/artofnext/calculator#readme",
   "dependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
